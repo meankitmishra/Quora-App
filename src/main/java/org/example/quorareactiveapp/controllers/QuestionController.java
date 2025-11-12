@@ -3,10 +3,7 @@ package org.example.quorareactiveapp.controllers;
 import org.example.quorareactiveapp.DTO.QuestionRequestDTO;
 import org.example.quorareactiveapp.DTO.QuestionResponseDTO;
 import org.example.quorareactiveapp.services.IQuestionService;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Mono;
 
 @RestController
@@ -23,6 +20,13 @@ public class QuestionController {
         return questionService.createQuestion(questionRequestDTO)
                 .doOnSuccess(response -> System.out.println("Question created successfully: " + response))
                 .doOnError(throwable -> System.out.println("Error creating question: " + throwable));
+    }
+
+    @GetMapping("/{id}")
+    public Mono<QuestionResponseDTO> getQuestionById(@PathVariable String id) {
+        return questionService.getQuestionById(id)
+                .doOnSuccess(response -> System.out.println("Question retrieved successfully: " + response))
+                .doOnError(throwable -> System.out.println("Error getting question " + throwable));
     }
 
 }

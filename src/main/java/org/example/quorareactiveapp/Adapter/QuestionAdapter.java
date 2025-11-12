@@ -12,14 +12,14 @@ import java.util.stream.Collectors;
 public class QuestionAdapter {
     public static Question QuestionFromRequestDTO(QuestionRequestDTO requestDTO, List<Tag> tagList) {
 
-        List<String> tagIds = tagList.stream()
-                .map(Tag::get_id)
+        List<String> tagNames = tagList.stream()
+                .map(Tag::getTagName)
                 .collect(Collectors.toList());
 
         return Question.builder()
                 .title(requestDTO.getTitle())
                 .content(requestDTO.getContent())
-                .tags(tagIds)
+                .tags(tagNames)
                 .build();
     }
 
@@ -33,6 +33,17 @@ public class QuestionAdapter {
                 .title(question.getTitle())
                 .content(question.getContent())
                 .tags(tagNames)
+                .createdAt(question.getCreatedAt())
+                .updatedAt(question.getUpdatedAt())
+                .build();
+    }
+
+    public static QuestionResponseDTO responseFromQuestion(Question question) {
+
+        return QuestionResponseDTO.builder()
+                .title(question.getTitle())
+                .content(question.getContent())
+                .tags(question.getTags())
                 .createdAt(question.getCreatedAt())
                 .updatedAt(question.getUpdatedAt())
                 .build();

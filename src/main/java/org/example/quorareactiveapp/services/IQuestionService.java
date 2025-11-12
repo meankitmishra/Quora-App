@@ -8,4 +8,5 @@ import reactor.core.publisher.Mono;
 public interface IQuestionService {
 
     public Mono<QuestionResponseDTO> createQuestion(QuestionRequestDTO questionRequestDTO);
+    public Mono<QuestionResponseDTO> getQuestionById(String id);
 }

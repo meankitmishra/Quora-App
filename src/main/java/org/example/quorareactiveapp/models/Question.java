@@ -28,6 +28,6 @@ public class Question extends BaseModel{
     private String content;
 
     @Indexed
-    @Field("tag_id")
+    @Field("tag_name")
     List<String> tags = new ArrayList<>();
 }
